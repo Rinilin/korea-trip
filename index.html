@@ -6,15 +6,15 @@
 <title>韓國行 · 2026 首爾之旅</title>
 <style>
   :root{
-    --bg:#0f1020;
-    --bg2:#1a1b3a;
-    --card:rgba(255,255,255,.06);
-    --card-border:rgba(255,255,255,.12);
-    --accent:#ff4d6d;
-    --accent2:#5b8cff;
-    --text:#f2f3ff;
-    --muted:#a9adcf;
-    --line:rgba(255,255,255,.18);
+    --bg:#f3ebe8;
+    --bg2:#e8dcd9;
+    --card:rgba(255,255,255,.58);
+    --card-border:rgba(150,120,120,.22);
+    --accent:#c48b8b;
+    --accent2:#b3a0ac;
+    --text:#5c4d4a;
+    --muted:#9a8781;
+    --line:rgba(150,120,120,.25);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -22,9 +22,10 @@
     font-family:"Noto Sans TC","Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
     color:var(--text);
     background:
-      radial-gradient(1200px 600px at 10% -10%,rgba(91,140,255,.25),transparent 60%),
-      radial-gradient(1000px 500px at 100% 0%,rgba(255,77,109,.22),transparent 55%),
+      radial-gradient(1200px 600px at 10% -10%,rgba(179,160,172,.35),transparent 60%),
+      radial-gradient(1000px 500px at 100% 0%,rgba(196,139,139,.32),transparent 55%),
       linear-gradient(180deg,var(--bg),var(--bg2));
+    background-attachment:fixed;
     min-height:100vh;
     line-height:1.6;
   }
@@ -39,7 +40,7 @@
     font-weight:800;
     letter-spacing:.04em;
     margin:.3em 0 .2em;
-    background:linear-gradient(90deg,#fff,#ffd0da,#c9d7ff);
+    background:linear-gradient(90deg,#b57e7e,#c89aa2,#a596a8);
     -webkit-background-clip:text;background-clip:text;
     -webkit-text-fill-color:transparent;
   }
@@ -54,7 +55,7 @@
     display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
     position:sticky;top:0;z-index:10;margin-top:10px;
     padding:12px 0;
-    background:linear-gradient(180deg,rgba(15,16,32,.96),rgba(15,16,32,.6));
+    background:linear-gradient(180deg,rgba(243,235,232,.95),rgba(243,235,232,.55));
     backdrop-filter:blur(8px);
   }
   .tab-btn{
@@ -67,7 +68,7 @@
   .tab-btn:hover{color:var(--text);border-color:var(--accent2);transform:translateY(-1px)}
   .tab-btn.active{
     background:linear-gradient(90deg,var(--accent),var(--accent2));
-    color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(255,77,109,.3);
+    color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(196,139,139,.4);
   }
 
   .day{margin-top:24px;animation:fade .3s ease}
@@ -99,8 +100,8 @@
   }
   .dot{
     position:absolute;left:63px;top:16px;width:16px;height:16px;border-radius:50%;
-    background:var(--bg2);border:3px solid var(--accent);z-index:2;
-    box-shadow:0 0 0 4px rgba(255,77,109,.12);
+    background:#fff;border:3px solid var(--accent);z-index:2;
+    box-shadow:0 0 0 4px rgba(196,139,139,.15);
   }
   .card{
     background:var(--card);border:1px solid var(--card-border);
@@ -112,11 +113,11 @@
   .tag{
     display:inline-block;margin-top:6px;font-size:.75rem;letter-spacing:.05em;
     padding:2px 10px;border-radius:999px;color:var(--muted);
-    background:rgba(255,255,255,.06);border:1px solid var(--card-border);
+    background:rgba(150,120,120,.08);border:1px solid var(--card-border);
   }
-  .tag.flight{color:#ffd0da;border-color:rgba(255,77,109,.4)}
-  .tag.stay{color:#c9d7ff;border-color:rgba(91,140,255,.4)}
-  .tag.event{color:#ffe6a0;border-color:rgba(255,214,120,.4)}
+  .tag.flight{color:#a76b6b;border-color:rgba(196,139,139,.5)}
+  .tag.stay{color:#7f7591;border-color:rgba(179,160,172,.55)}
+  .tag.event{color:#a4794f;border-color:rgba(190,150,110,.5)}
 
   footer{text-align:center;color:var(--muted);margin-top:60px;font-size:.85rem}
   footer .heart{color:var(--accent)}
