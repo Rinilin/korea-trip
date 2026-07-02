@@ -109,14 +109,15 @@
   }
   .place{font-weight:700;font-size:1.05rem}
   .note{color:var(--muted);font-size:.82rem;margin-top:3px;line-height:1.5}
-  .tag{
-    display:inline-block;margin-top:6px;font-size:.75rem;letter-spacing:.05em;
-    padding:2px 10px;border-radius:999px;color:var(--muted);
-    background:rgba(150,120,120,.08);border:1px solid var(--card-border);
+  .map{
+    width:100%;height:160px;border:0;border-radius:10px;margin-top:10px;
+    filter:saturate(.92);display:block;
   }
-  .tag.flight{color:#a76b6b;border-color:rgba(196,139,139,.5)}
-  .tag.stay{color:#7f7591;border-color:rgba(179,160,172,.55)}
-  .tag.event{color:#a4794f;border-color:rgba(190,150,110,.5)}
+  .maplink{
+    display:inline-block;margin-top:8px;font-size:.8rem;font-weight:700;
+    color:var(--accent);text-decoration:none;
+  }
+  .maplink:hover{text-decoration:underline}
 
   footer{text-align:center;color:var(--muted);margin-top:60px;font-size:.85rem}
   footer .heart{color:var(--accent)}
@@ -140,59 +141,55 @@ function weekOf(dateStr){
   const [y,m,d] = dateStr.split("/").map(Number);
   return "星期" + WEEK[new Date(y, m-1, d).getDay()];
 }
-function classify(name){
-  if(/✈|IT60/.test(name)) return {cls:"flight", label:"✈️ 航班"};
-  if(/機場|Airport|Terminal/.test(name)) return {cls:"flight", label:"🛫 機場 / 航廈"};
-  if(/旅館|Hostel|Hotel|膠囊/.test(name)) return {cls:"stay", label:"🛏️ 住宿"};
-  if(/DOME|Arena|體操競技場|esports|首爾塔|世界|Zoolung|Cafe|Hetras/.test(name))
-    return {cls:"event", label:"📍 景點 / 活動"};
-  return {cls:"", label:"📍 地點"};
-}
+const HOSTEL = "K-Grand Hostel Seoul Dongdaemun";
+const ICN_T1 = "인천국제공항 제1여객터미널";
+const TPE_T1 = "桃園國際機場 第一航廈";
+const KSPO  = "KSPO DOME 올림픽체조경기장";
 
 const DATA = [
   {date:"2026/08/12", stops:[
-    ["17:00","桃園國際機場 · 報到","第一航廈 T1｜提前 3 小時抵達機場"],
+    ["17:00","桃園國際機場 · 報到","第一航廈 T1｜提前 3 小時抵達機場",TPE_T1],
     ["20:00","IT602 ✈ 桃園 TPE → 仁川 ICN","虎航 tigerair｜20:00 起飛 → 23:30 抵達"],
-    ["23:30","仁川國際機場 · 抵達","第一航廈 T1"],
+    ["23:30","仁川國際機場 · 抵達","第一航廈 T1",ICN_T1],
   ]},
   {date:"2026/08/13", stops:[
-    ["01:35","Darakhyu 膠囊旅館（仁川國際機場第一航廈 T1）","入住 20:00 後 · 房間 12 小時制（超時每小時 +₩10,000）· ☎ 032-743-5000"],
-    ["08:00","仁川國際機場（第一航廈 T1）"],
-    ["10:53","K-Grand Hostel（DDM, Wangsimni）"],
-    ["11:36","Gen.G esports"],
-    ["11:56","T1 Cafe & Arena"],
-    ["13:25","Hetras 聖水洞"],
-    ["17:15","K-Grand Hostel（DDM, Wangsimni）"],
+    ["01:35","Darakhyu 膠囊旅館（仁川國際機場第一航廈 T1）","入住 20:00 後 · 房間 12 小時制（超時每小時 +₩10,000）· ☎ 032-743-5000","다락휴 인천공항 제1터미널"],
+    ["08:00","仁川國際機場（第一航廈 T1）","",ICN_T1],
+    ["10:53","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
+    ["11:36","Gen.G esports","","Gen.G esports Seoul"],
+    ["11:56","T1 Cafe & Arena","","T1 Cafe and Arena Seoul"],
+    ["13:25","Hetras 聖水洞","","Hetras 성수동"],
+    ["17:15","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
   ]},
   {date:"2026/08/14", stops:[
-    ["00:00","K-Grand Hostel（DDM, Wangsimni）"],
-    ["10:38","首爾奧林匹克體操競技場 KSPO DOME"],
-    ["22:38","K-Grand Hostel（DDM, Wangsimni）"],
+    ["00:00","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
+    ["10:38","首爾奧林匹克體操競技場 KSPO DOME","",KSPO],
+    ["22:38","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
   ]},
   {date:"2026/08/15", stops:[
-    ["00:00","K-Grand Hostel（DDM, Wangsimni）"],
-    ["10:38","首爾奧林匹克體操競技場 KSPO DOME"],
-    ["22:38","K-Grand Hostel（DDM, Wangsimni）"],
+    ["00:00","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
+    ["10:38","首爾奧林匹克體操競技場 KSPO DOME","",KSPO],
+    ["22:38","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
   ]},
   {date:"2026/08/16", stops:[
-    ["00:00","K-Grand Hostel（DDM, Wangsimni）"],
-    ["10:38","首爾奧林匹克體操競技場 KSPO DOME"],
-    ["22:38","K-Grand Hostel（DDM, Wangsimni）"],
+    ["00:00","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
+    ["10:38","首爾奧林匹克體操競技場 KSPO DOME","",KSPO],
+    ["22:38","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
   ]},
   {date:"2026/08/17", stops:[
-    ["00:00","K-Grand Hostel（DDM, Wangsimni）"],
-    ["10:41","首爾塔"],
-    ["12:29","Zoolung Zoolung"],
-    ["14:15","K-Grand Hostel（DDM, Wangsimni）"],
+    ["00:00","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
+    ["10:41","首爾塔","","N서울타워"],
+    ["12:29","Zoolung Zoolung","","Zoolung Zoolung Seoul"],
+    ["14:15","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
   ]},
   {date:"2026/08/18", stops:[
-    ["00:00","K-Grand Hostel（DDM, Wangsimni）"],
-    ["11:33","樂天世界購物中心"],
-    ["21:30","仁川國際機場 · 報到","第一航廈 T1｜提前 3 小時（航班 00:30 起飛）"],
+    ["00:00","K-Grand Hostel（DDM, Wangsimni）","",HOSTEL],
+    ["11:33","樂天世界購物中心","","롯데월드몰"],
+    ["21:30","仁川國際機場 · 報到","第一航廈 T1｜提前 3 小時（航班 00:30 起飛）",ICN_T1],
   ]},
   {date:"2026/08/19", stops:[
     ["00:30","IT603 ✈ 仁川 ICN → 桃園 TPE","虎航 tigerair｜00:30 起飛 → 02:15 抵達"],
-    ["02:15","桃園國際機場 · 抵達","第一航廈 T1 · 回到台灣 🇹🇼"],
+    ["02:15","桃園國際機場 · 抵達","第一航廈 T1 · 回到台灣 🇹🇼",TPE_T1],
   ]},
 ];
 
@@ -217,15 +214,15 @@ DATA.forEach((day, i) => {
       <span class="day-week">${weekOf(day.date)}</span>
     </div>
     <div class="timeline">
-      ${day.stops.map(([t,name,note])=>{
-        const c = classify(name);
+      ${day.stops.map(([t,name,note,map])=>{
         return `<div class="stop">
           <div class="dot"></div>
           <div class="card">
             <div class="time">${t}</div>
             <div class="place">${name}</div>
             ${note ? `<div class="note">${note}</div>` : ""}
-            <span class="tag ${c.cls}">${c.label}</span>
+            ${map ? `<iframe class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${encodeURIComponent(map)}&z=16&output=embed"></iframe>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(map)}" target="_blank" rel="noopener">📍 在 Google 地圖開啟</a>` : ""}
           </div>
         </div>`;
       }).join("")}
