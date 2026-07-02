@@ -109,14 +109,16 @@
   }
   .place{font-weight:700;font-size:1.05rem}
   .note{color:var(--muted);font-size:.82rem;margin-top:3px;line-height:1.5}
+  .maps{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
   .maplink{
-    display:inline-block;margin-top:8px;font-size:.78rem;letter-spacing:.05em;
-    padding:3px 12px;border-radius:999px;font-weight:700;
-    color:var(--accent);text-decoration:none;
-    background:rgba(196,139,139,.1);border:1px solid rgba(196,139,139,.45);
+    display:inline-block;font-size:.78rem;letter-spacing:.03em;
+    padding:3px 13px;border-radius:999px;font-weight:700;text-decoration:none;
     transition:all .15s ease;
   }
-  .maplink:hover{background:var(--accent);color:#fff;border-color:transparent}
+  .maplink.google{color:var(--accent);background:rgba(196,139,139,.1);border:1px solid rgba(196,139,139,.45)}
+  .maplink.google:hover{background:var(--accent);color:#fff;border-color:transparent}
+  .maplink.naver{color:#5f8c6c;background:rgba(122,160,130,.12);border:1px solid rgba(122,160,130,.5)}
+  .maplink.naver:hover{background:#7a9a80;color:#fff;border-color:transparent}
 
   footer{text-align:center;color:var(--muted);margin-top:60px;font-size:.85rem}
   footer .heart{color:var(--accent)}
@@ -220,7 +222,10 @@ DATA.forEach((day, i) => {
             <div class="time">${t}</div>
             <div class="place">${name}</div>
             ${note ? `<div class="note">${note}</div>` : ""}
-            ${map ? `<a class="maplink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(map)}" target="_blank" rel="noopener">🗺️ 地圖</a>` : ""}
+            ${map ? `<div class="maps">
+              ${!/桃園|TPE/.test(map) ? `<a class="maplink naver" href="https://map.naver.com/p/search/${encodeURIComponent(map)}" target="_blank" rel="noopener">🗺️ Naver</a>` : ""}
+              <a class="maplink google" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(map)}" target="_blank" rel="noopener">🗺️ Google</a>
+            </div>` : ""}
           </div>
         </div>`;
       }).join("")}
